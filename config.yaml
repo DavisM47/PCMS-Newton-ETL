@@ -1,0 +1,672 @@
+connection:
+  driver: SQL Server
+  server: 557NCL3\MYSQLSERVER
+  database: PCMS_DEMO_9070
+  trusted_connection: 'yes'
+filters:
+  units: []
+mappings:
+  operating_status:
+    In Service: In Service
+    Abandoned in Place (Air-Gapped): Out of Service
+    Demolished: Out of Service
+    Idle: Stand By
+    Intermittent Service: In Service
+    N/A: Out of Service
+    Pending/Proposed/Pre-Commission: Out of Service
+    Spare/Warehouse: In Service
+  climate:
+    Arid/Dry: Dry
+    Marine: Severe
+    Severe: Severe
+    Temperate: Mild
+  equip_type:
+    Air Receiver: Pressure Vessel - ASME BPVC Standard - Drum - Receiver
+    Boiler - Fired: Heat Exchanger - Steam Generator - Shell
+    Boiler - Process Steam Generator: Heat Exchanger - Steam Generator - Shell
+    Boiler - Unfired: Heat Exchanger - Steam Generator - Shell
+    Cathodic Protection: Storage Tank - API Standard 651 - Cathodic Protected Tank
+      Bottom Aboveground Petroleum Storage Tank
+    Cooling Tower: Pressure Vessel - Tower - General
+    Desuperheater: Heater
+    Drum: Pressure Vessel - ASME BPVC Standard - Drum - Separator
+    Exchanger - Air Cooled: Heat Exchanger - Air-Cooled - API Standard 661 - Motor
+      Driven
+    Exchanger - Double Pipe: Heat Exchanger - Shell-and-Tube - API Standard 660 -
+      U-Tube - Shell
+    Exchanger - Plate/Frame: Heat Exchanger - Plate and Frame Exchanger
+    Exchanger - Shed Coil: Heat Exchanger - Shell-and-Tube - API Standard 660 - U-Tube
+      - Shell
+    Exchanger - Shell/Tube: Heat Exchanger - Shell-and-Tube - API Standard 660 - U-Tube
+      - Shell
+    Expansion Joint/Bellows: Process Pipe - Expansion Joint
+    Filter/Strainer: Pressure Vessel - ASME BPVC Standard - Filter
+    Fired Heater: Heater
+    Flare/Stack: Fired Heater - Flare
+    Flexible Hose: Pipe
+    Incinerator: Fired Heater - Incinerator
+    Inspection Equipment: Unrated Vessel/Tank - Process Vessel
+    Instrument: Pipe
+    Other: Unrated Vessel/Tank - Process Vessel
+    Pipe: Process Pipe - ASME B31.3 Standard - Pipe
+    Pump: Pump - Positive Displacement - General
+    Reactor: Pressure Vessel - ASME BPVC Standard - Reactor
+    Relief Valve: Pressure Relief Device - Conventional
+    Relief Valve - Pilot Operated: Pressure Relief Device - Pilot
+    Rupture Disk: Pressure Relief Device - Rupture Disk
+    Sample Bomb/Station: Transmitter - Analyzer - Sampler
+    Sphere: Tank
+    Sump/Pit: Unrated Vessel/Tank - Sump
+    Tank: Tank
+    Tank Pressure/Vacuum Relief Valve: Pressure Relief Device - Pressure/Vacuum Vent
+    Tower: Pressure Vessel - Tower - General
+    Unit: Unrated Vessel/Tank - Process Vessel
+    Vacuum Ejector/Eductor: Process Pipe - ASME B31.3 Standard - Jet Eductors/Ejector
+    Valve: Valve - On-Off - Solenoid
+    Vertical Pump Can: Unrated Vessel/Tank - Process Vessel
+  category:
+    Active: 'FALSE'
+    Inactive: 'TRUE'
+  quality_ind:
+    I: 'TRUE'
+    C: 'FALSE'
+    D: 'FALSE'
+    E: 'FALSE'
+    G: 'FALSE'
+    L: 'FALSE'
+    N: 'FALSE'
+    R: 'FALSE'
+    V: 'FALSE'
+  damage_mechanism:
+    885F Embrittlement: "885\xB0F (475\xB0C) Embrittlement"
+    Amine Corrosion: null
+    Amine Stress Corrosion Cracking: Amine Stress Corrosion Cracking
+    Ammonia Stress Corrosion Cracking: Ammonia Stress Corrosion Cracking
+    Ammonium Bisulfide Corrosion: Ammonium Bisulfide (ASW) Corrosion
+    Ammonium Chloride Corrosion: Ammonium Chloride Corrosion
+    Aqueous Organic Acid Corrosion: null
+    Boiler Water Condensate Corrosion: Boiler Water/Condensate Corrosion
+    Brine Corrosion: Brine Corrosion
+    Brittle Fracture: Brittle Fracture
+    Carbonate Stress Corrosion Cracking: Carbonate Stress Corrosion Cracking
+    Carburization: null
+    Caustic Corrosion: Caustic Corrosion
+    Caustic Stress Corrosion Cracking: Caustic Stress Corrosion Cracking
+    Cavitation: null
+    CUI Chloride Stress Corrosion Cracking: CUI Chloride Stress Corrosion Cracking
+    External Chloride Stress Corrosion Cracking: External Chloride Stress Corrosion
+      Cracking
+    Chloride Stress Corrosion Cracking - Internal: Internal Chloride Stress Corrosion
+      Cracking
+    CO2 Corrosion: CO2 Corrosion
+    Concentration Cell Corrosion: null
+    Cooling Water Corrosion: Cooling Water Corrosion
+    Corrosion Fatigue (Deaerator Cracking): null
+    Corrosion Under Insulation/Fireproofing: CUI Carbon and Low Alloy Steels
+    Creep and Stress Rupture: Creep/Stress Rupture
+    Dealloying: null
+    Decarburization: null
+    Dissimilar Metal Weld (DMW) Cracking: Dissimilar Metal Weld (DMW) Cracking
+    Erosion/Erosion-Corrosion: Erosion/Erosion-Corrosion
+    Ethanol Stress Corrosion Cracking: null
+    External Corrosion Carbon and Low Alloy Steels: Atmospheric Corrosion
+    Flue Gas Dew Point Corrosion: Flue Gas Dew Point Corrosion
+    Fuel Ash Corrosion: null
+    Galvanic Corrosion: null
+    Gaseous Oxygen-Induced Ignition: null
+    Graphitic Corrosion of Cast Iron: null
+    Graphitization: null
+    HIC/SOHIC in HF acid: HIC/SOHIC in Hydrofluoric Acid
+    High Temperature H2/H2S Corrosion: High Temperature H2/H2S Corrosion
+    High Temperature H2/H2S Corrosion - High Velocity: High Temperature H2/H2S Corrosion
+    High Temperature Hydrogen Attack (HTHA): High Temperature Hydrogen Attack
+    Hydrochloric Acid Corrosion: Hydrochloric Acid Corrosion
+    Hydrofluoric Acid (HF) Corrosion: null
+    Hydrofluoric Acid SCC of Nickel Alloys: Hydrogen Stress Cracking in Hydrofluoric
+      Acid
+    Hydrogen Embrittlement: Hydrogen Embrittlement (HE)
+    Hydrogen Stress Cracking in HF Acid: Hydrogen Stress Cracking in Hydrofluoric
+      Acid
+    Liquid Metal Embrittlement: Liquid Metal Embrittlement (LME)
+    Mechanical Fatigue: Mechanical Fatigue
+    Metal Dusting: null
+    Microbiologically Induced Corrosion (MIC): Microbiologically Influenced Corrosion
+    Naphthenic Acid Corrosion: Naphthenic Acid Corrosion
+    Nitriding: null
+    Oxidation: Oxidation
+    Oxygenated Water Corrosion (non-boiler): null
+    Phenol Corrosion: null
+    Phosphoric Acid Corrosion: null
+    Polythionic Acid Stress Corrosion Cracking: Polythionic Acid Stress Corrosion
+      Cracking
+    Refractory Degradation: Refractory Degradation
+    Reheat Cracking: null
+    Short term Overheating - Stress Rupture: Short Term Overheating - Stress Rupture
+    Sigma Phase Embrittlement: Sigma Phase Embrittlement
+    Softening (Spheroidization): null
+    Soil Corrosion: Soil Corrosion
+    Sour Water Corrosion: Acidic Sour Water Corrosion
+    Strain Aging: null
+    Sulfidation: Sulfidation
+    Sulfidation - High Velocity: Sulfidation
+    Sulfuric Acid Corrosion: null
+    Temper Embrittlement: Temper Embrittlement
+    Thermal Fatigue: Thermal Fatigue
+    Thermal Shock: null
+    Titanium Hydriding: null
+    Unspecified External Corrosion: Atmospheric Corrosion
+    Unspecified Internal Corrosion - General: Unspecified Internal Corrosion
+    Unspecified Internal Corrosion - Localized: Unspecified Internal Corrosion
+    Wet H2S (HIC/SOHIC/Blistering): Wet H2S Damage (Blistering/HIC/SOHIC)
+    Wet H2S (Sulfide Stress Cracking): Wet H2S Damage (Sulfide Stress Cracking)
+  damage_mode:
+    Internal Loss of Thickness: Thinning
+    External Loss of Thickness: Thinning
+    Mechanical & Metallurgical Failure: Cracking/Metallurgical
+    Environment Assisted Cracking: Cracking/Metallurgical
+  pof_model:
+    Thinning: Thinning (Multi-Path Linear Degradation)
+    Cracking/Metallurgical: Stress Corrosion Cracking Damage Factor (API 581)
+  damage_type:
+    General: General Thinning
+    Local: Local Thinning
+default_values:
+  areas:
+    Action: Add
+  units:
+    Action: Add
+    Climate: Severe
+  systems:
+    Action: Add
+  sub_systems:
+    Action: Add
+  assets:
+    Action: Add
+  components:
+    Action: Add
+  thickness_locations:
+    Action: Add
+    CML Unit of Measure: = "In"
+    CML Geometry Type: UNKNOWN
+  thickness_readings:
+    Action: Add
+    Reading Unit: In
+  tasks:
+    Action: Add
+    Task Definition: Replace Asset
+    Task Number: Replace Asset
+    Task Description: Replace Asset
+    Task Type: Corrective - Replacement
+    Target: Asset
+    Failure Mode: Thinning
+    Damage Mode: Local Thinning
+    Damage Location: Internal
+    Implementation Status: Potential
+    Rate After Replacement: Lvc
+  components_cmls:
+    Action: Add
+    Task Number: Replace Asset
+  steps:
+    Action: Add
+    Task Number: Replace Asset
+    Critical Path: 'FALSE'
+    Step Description: Replace Asset
+    Downtime (Hours): 24
+    Material Cost ($): 100000
+    Sort Order: 0
+  assessments:
+    Action: Update
+    State: Active
+    Status Change Reason: Change
+  functions:
+    Action: Add
+    Name: Transport fluid/gas from the inlet to the outlet
+    Is Manually Added?: 'TRUE'
+  failure_modes:
+    Action: Add
+    Is Manually Added?: 'TRUE'
+    Hidden: 'FALSE'
+  failure_mechanisms:
+    Action: Add
+    Is Manually Added?: 'TRUE'
+    Susceptibility Override: "Corrosion Rate Modeled"
+    Min Modeled Corrosion Rate Override: 2
+    Max Modeled Corrosion Rate Override: 4
+    Hole Size Override: Small Hole
+  function_failure_mode:
+    Action: Add
+    Function Name: Transport fluid/gas from the inlet to the outlet
+    Failure Mode Name: Thinning
+  failure_mode_failure_mech:
+    Action: Add
+    Failure Mode Name: Thinning
+  shared_fields:
+    Action: null
+  manual_hse:
+    Action: Add
+    Active: 'TRUE'
+    Area (ft2): 35
+  manual_lost_prod:
+    Action: Add
+    Active: 'TRUE'
+  newton_repair_replace_task:
+    Action: Add
+    Active: 'TRUE'
+    Task Number: Replace Asset
+    Task Definition: Replace Asset
+newton_columns:
+  areas:
+  - Action
+  - Area Client ID
+  - Name
+  - Description
+  - Area Newton ID
+  - Note
+  units:
+  - Action
+  - Area Client ID
+  - Unit Client ID
+  - Name
+  - Description
+  - Climate
+  - Area Newton ID
+  - Unit Newton ID
+  - Note
+  systems:
+  - Action
+  - Unit Client ID
+  - System Client ID
+  - Name
+  - Description
+  - System Type
+  - Unit Newton ID
+  - System Newton ID
+  - Note
+  sub_systems:
+  - Action
+  - System Client ID
+  - Sub-System Client ID
+  - Name
+  - Description
+  - System Newton ID
+  - Sub-System Newton ID
+  - Note
+  assets:
+  - Action
+  - Sub-System Client ID
+  - Asset Client ID
+  - Name
+  - Asset Sub-Type
+  - Install Date
+  - In Service Date
+  - Operating Status
+  - P&ID Number
+  - Drawing Number
+  - Discipline
+  - Manufacturer
+  - Model Number
+  - Serial Number
+  - Climate
+  - Soil Type
+  - Soil Resistivity
+  - Detection System Rating
+  - Mitigation System
+  - Isolation System Rating
+  - Description
+  - Lost Production Impact %
+  - Sub-System Newton ID
+  - Asset Newton ID
+  - Note
+  components:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Name
+  - Component Type
+  - Description
+  - Install Date
+  - In-Service Date
+  - Operating Status
+  - Asset Newton ID
+  - Component Newton ID
+  - Note
+  thickness_locations:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Asset Sub-Type
+  - CML Newton ID
+  - CML Client ID
+  - Description
+  - External Source ID
+  - CML Geometry Type
+  - Has Insulation
+  - Outside Diameter
+  - Inside Diameter
+  - Base Material Thickness
+  - Cladding Thickness
+  - Retirement Limit
+  - Critical Limit
+  - CML Unit of Measure
+  - Row
+  - Tube
+  - In-Service Date Override
+  - Yield Strength (psi)
+  - Tensile Strength (psi)
+  - Allowable Stress (psi)
+  - Ignored?
+  - Note
+  thickness_readings:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - CML Client ID
+  - CML Description
+  - Reading Newton ID
+  - Task Number
+  - Reading Date
+  - Reading
+  - Reading Unit
+  - Reading Uncertainty
+  - Ignored?
+  - Note
+  tasks:
+  - Action
+  - Asset Client ID
+  - Task CRS ID
+  - Task Definition
+  - Task Number
+  - Task Description
+  - Task Type
+  - Repair Restore (%)
+  - Temporary Repair Duration (days)
+  - Task Approver
+  - Task Owner
+  - Target
+  - Failure Mode
+  - Damage Mode
+  - Damage Location
+  - Implementation Status
+  - Start Date
+  - Completion Date
+  - Minimum Monitoring Interval (days)
+  - Maximum Monitoring Interval (days)
+  - Prevent Task Optimization Override?
+  - IDMS Number
+  - CMMS Number
+  - Inspection Effectiveness Grade
+  - Inspection Quantitative Effectiveness (%)
+  - Susceptible Area Client ID
+  - Inspected (%)
+  - Damage Mode Indicated?
+  - Damage Indicated (%)
+  - Task Probability of Detection (%)
+  - Total Duration Hours (Calculated)
+  - Total Downtime Hours (Calculated)
+  - Total Cost $ (Calculated)
+  - Estimated Lost Production Cost ($) Override
+  - Benefit Cost Ratio (Calculated)
+  - Notes
+  - Created
+  - Created By
+  - Rate After Replacement
+  - Upgrade - Eta (years)
+  - Upgrade - Beta
+  - Upgrade - Gamma (years)
+  components_cmls:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Task Number
+  - CML Type
+  - CML Client ID
+  steps:
+  - Action
+  - Asset Client ID
+  - Task Number
+  - Task Step CRS ID
+  - Critical Path
+  - Step Description
+  - Duration (Hours)
+  - Downtime (Hours)
+  - Labor Cost ($)
+  - Material Cost ($)
+  - Task Executor
+  - Notes
+  - Sort Order
+  assessments:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Assessment ID
+  - State
+  - Status
+  - Status Change Reason
+  - Status Changed By
+  - Status Changed
+  - Availability
+  - Corrosion Source
+  - Notes
+  functions:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Assessment ID
+  - Name
+  - Reason
+  - Is Manually Added?
+  - Notes
+  failure_modes:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Assessment ID
+  - Name
+  - Reason
+  - Is Manually Added?
+  - Hidden
+  - PoF Model
+  - Stage 1 Eta (years)
+  - Stage 1 Beta
+  - Stage 1 Gamma (years)
+  - Stage 2 Eta (years)
+  - Stage 2 Beta
+  - Stage 2 Gamma (years)
+  - Material for Creep
+  - Creep Behavior
+  - Creep Curve
+  - Creep Temperature CML
+  - Creep Pressure CML
+  - Thickness CML
+  - Data Confidence
+  - Overall Rate Override (mpy)
+  - Embrittlement Reference Temperature Curve
+  - Is Embrittlement Transition Temperature Estimated?
+  - Embrittlement Transition Temperature (F)
+  - Impact Test Temperature (F)
+  - Step Cooling Embrittlement Test Temperature (F)
+  - Age In Service In Temperature Range (hours)
+  - Base Material Corrosion Rate (Mils/Year)
+  - Base Material Corrosion Rate Uncertainity
+  - Cladding Material Corrosion Rate (Mils/Year)
+  - Cladding Material Corrosion Rate Uncertainity
+  - Outlier Detection Enabled
+  - Outlier Detection Confidence Interval
+  - Downtime/Idle Detection Enabled
+  - 'Downtime/Idle Detection # Of Clusters'
+  - Aggregation Enabled
+  - Aggregation Frequency
+  - Aggregation Method
+  - Auto Detect Repairs Enabled
+  - Seasonal Temperature Detection
+  - Notes
+  failure_mechanisms:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Assessment ID
+  - Name
+  - Reason
+  - Is Manually Added?
+  - Location
+  - Damage Mode
+  - Damage Mode Override
+  - Has Susceptibility Calculation?
+  - Susceptibility
+  - Susceptibility Override
+  - Effective Susceptibility
+  - Min Modeled Corrosion Rate
+  - Max Modeled Corrosion Rate
+  - Min Modeled Corrosion Rate Override
+  - Max Modeled Corrosion Rate Override
+  - Cladding Susceptibility
+  - Cladding Susceptibility Override
+  - Cladding Min Modeled Corrosion Rate
+  - Cladding Max Modeled Corrosion Rate
+  - Cladding Min Modeled Corrosion Rate Override
+  - Cladding Max Modeled Corrosion Rate Override
+  - Hole Size
+  - Hole Size Override
+  - Notes
+  function_failure_mode:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Assessment ID
+  - Function Name
+  - Failure Mode Name
+  failure_mode_failure_mech:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Assessment ID
+  - Failure Mode Name
+  - Failure Mechanism Name
+  shared_fields:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Representative Carrier Fluid
+  - Storage Fluid Phase
+  - Toxic Model
+  - Toxic Fluid
+  - Toxic %
+  - GFF Component Type
+  - Liquid Volume % Override
+  - Inventory Group
+  - Component Volume (ft3) Override
+  - Length (ft)
+  - Max Inside Diameter from all CMLs (in) Override
+  manual_hse:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Assessment ID
+  - Active
+  - Area (ft2)
+  - Notes
+  manual_lost_prod:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Assessment ID
+  - Active
+  - Cost ($)
+  - Notes
+  newton_repair_replace_task:
+  - Action
+  - Asset Client ID
+  - Component Client ID
+  - Assessment ID
+  - Active
+  - Task Number
+  - Task Definition
+  - Notes
+schema_map:
+  areas:
+    complex_seqno: Area Client ID
+    complex: Name
+  units:
+    complex_seqno: Area Client ID
+    unit_seqno: Unit Client ID
+    unit_id: Name
+    name: Description
+  systems:
+    unit_seqno: Unit Client ID
+    equip_type: Name
+  sub_systems:
+    equip_type: Name
+  assets:
+    equip_seqno: Asset Client ID
+    equip_id: Name
+    equip_type: Asset Sub-Type
+    install_dt: Install Date
+    in_service_dt: In Service Date
+    operating_status: Operating Status
+    name: Description
+  components:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+    circuit_id: Name
+    name: Description
+  thickness_locations:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+    tml_seqno: CML Client ID
+    tml_id: External Source ID
+    keywords: Description
+    pipe_size: Inside Diameter
+    nominal_thickness: Base Material Thickness
+    retiring_limit: Retirement Limit
+    category: Ignored?
+  thickness_readings:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+    tml_seqno: CML Client ID
+    read_dt: Reading Date
+    thickness: Reading
+    quality_ind: Ignored?
+    description: Note
+  tasks:
+    equip_seqno: Asset Client ID
+  components_cmls:
+    equip_seqno: Asset Client ID
+  steps:
+    equip_seqno: Asset Client ID
+  assessments:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+  functions:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+  failure_modes:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+    suggest_rate: Base Material Corrosion Rate (Mils/Year)
+    damage_mode: Name
+  failure_mechanisms:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+    damage_mechanism: Name
+    damage_mode: Location
+    damage_type: Damage Mode
+  function_failure_mode:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+  failure_mode_failure_mech:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+    damage_mechanism: Failure Mechanism Name
+  shared_fields:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+  manual_hse:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+    AREA_CONS: Area (ft2)
+  manual_lost_prod:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID
+  newton_repair_replace_task:
+    equip_seqno: Asset Client ID
+    circuit_seqno: Component Client ID

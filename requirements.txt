@@ -1,0 +1,7 @@
+pandas
+sqlalchemy
+pyyaml
+pyodbc
+openpyxl
+striprtf
+PySide6
