@@ -1,37 +1,39 @@
 PCMS → Newton ETL Tool
 
-## Overview
-- Graphical User Interface (PySide6)
-- Config editor
-- Mapping editor
-- Unit filter editor
-- SQL Server connection editor
-- One-click ETL execution buttons
+REQUIREMENTS
+------------
+Python 3.x
+All dependencies listed in requirements.txt
 
-## Requirements
-- Python 3.10+
-- Access to PCMS database
-- ODBC driver installed
+Install dependencies:
+    pip install -r requirements.txt
 
-## Setup
 
-1. Install Python:
-   https://www.python.org/downloads/
+CONFIGURATION
+-------------
+Update config.yaml with your SQL Server connection details before running.
 
-2. Create a virtual environment:
-   python -m venv venv
 
-3. Activate the environment:
-   Windows:
-     venv\Scripts\activate
-   macOS/Linux:
-     source venv/bin/activate
+RUNNING THE TOOL
+----------------
+Navigate to the project folder in your terminal.
 
-4. Install dependencies:
-   pip install -r requirements.txt
+Generate a single workbook:
+    python main.py --workbook asset_register
+    python main.py --workbook inspection_data
+    python main.py --workbook asset_task
+    python main.py --workbook pof_assessment
+    python main.py --workbook cof_assessment
 
-## Run
+Generate all workbooks at once:
+    python main.py --all
 
-From the project root:
-   python -m ui.etl_app
+When prompted, enter "pre" or "post" for AIMI state.
+If anything other than "pre" or "post" is entered, it will default to "pre".
+
+
+OUTPUT
+------
+All generated Excel files are saved to the output/ folder
+with a timestamp in the filename.
 
