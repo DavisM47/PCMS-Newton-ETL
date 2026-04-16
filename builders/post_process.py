@@ -476,7 +476,7 @@ def failure_mode_failure_mech_post_process(df, config, state):
     ] = "Cracking/Metallurgical"
 
     damage_mechanism_map = config["mappings"]["damage_mechanism"]
-    df["Name"] = df[dm].map(damage_mechanism_map).fillna(df[dm])
+    df["Failure Mechanism Name"] = df[dm].map(damage_mechanism_map).fillna(df[dm])
     
     return df
 
