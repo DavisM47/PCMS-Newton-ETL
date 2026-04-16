@@ -365,11 +365,12 @@ def failure_mechanisms_post_process(df, config, state):
     df["Component Client ID"] = df[equip] + '-' + df[circuit]
     df["Asset Client ID"] = df[sys] + '-' + df[equip]
 
+    df["Susceptibility Override"] = "Corrosion Rate Modeled"
+
     if state == "pre":
         df["Name"] = "Unspecified Internal Corrosion"
         df["Location"] = "Internal"
         df["Damage Mode"] = "Local Thinning"
-        df["Susceptibility Override"] = "Corrosion Rate Modeled"
         df["Min Modeled Corrosion Rate Override"] = 2
         df["Max Modeled Corrosion Rate Override"] = 4
         df["Hole Size Override"] = "Small Hole"
