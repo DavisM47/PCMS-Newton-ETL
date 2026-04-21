@@ -99,6 +99,12 @@ class QtWindow(QWidget):
         layout.addWidget(self.database_input)
         # ---- End Connection ----
 
+        # ---- Test Button ----
+        test_btn = QPushButton("Test SQL Connection")
+        test_btn.clicked.connect(self.test)
+        layout.addWidget(test_btn)
+        # ---- End Test Button ----
+        
         # ---- Save Button ----
         save_btn = QPushButton("Save")
         save_btn.clicked.connect(self.save)
@@ -699,6 +705,14 @@ class QtWindow(QWidget):
             self.schema_map_list.takeItem(self.schema_map_list.row(item))  
     # ---- End Schema Map ----
 
+    def test(self):
+        if validate_sql_engine(self.engine):
+            QMessageBox.information(self, "Success", "SQL connection successful")
+        else:
+            QMessageBox.critical(self, "Failed", "SQL connection failed")
+            
+        return
+        
     def save(self, silent=False):
         section = self.section_selector.currentText()
  
@@ -787,6 +801,7 @@ class QtWindow(QWidget):
             QMessageBox.information(self, "Success", "Config saved successfully")
         
         self.config = load_config()
+        self.engine = get_engine(self.config)
         return
             
     def get_radio_option(self) -> str:
