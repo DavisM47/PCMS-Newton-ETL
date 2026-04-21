@@ -4,7 +4,7 @@ from PySide6.QtWidgets import (
     QLineEdit, QMessageBox, QComboBox, QSizePolicy, QRadioButton
 )
 
-from utils.config_manager import load_config, save_config
+from utils.config_manager import load_config, save_config, apply_aimi_state
 import sys
 
 import builders.asset_register as asset_register
@@ -793,33 +793,8 @@ class QtWindow(QWidget):
             return "post" if self.post_radio.isChecked() else "pre"
     
     def handle_radio(self):
-        system_schema_dict = self.config.get("schema_map", {}).get("systems", {})
-        new_system_schema = {}
-        
-        # Systems
-        for key, value in system_schema_dict.items():
-            if key == "equip_type" and self.post_radio.isChecked():
-                new_system_schema["system_code"] = value
-            elif key == "system_code" and self.pre_radio.isChecked():
-                new_system_schema["equip_type"] = value
-            else:
-                new_system_schema[key] = value
-            
-            self.config["schema_map"]["systems"] = new_system_schema
-
-        # Sub Systems
-        subsystem_schema_dict = self.config.get("schema_map", {}).get("sub_systems", {})
-        new_subsystem_schema = {}
-
-        for key, value in subsystem_schema_dict.items():
-            if key == "equip_type" and self.post_radio.isChecked():
-                new_subsystem_schema["system_code"] = value
-            elif key == "system_code" and self.pre_radio.isChecked():
-                new_subsystem_schema["equip_type"] = value
-            else:
-                new_subsystem_schema[key] = value
-            
-            self.config["schema_map"]["sub_systems"] = new_subsystem_schema
+        state = self.get_radio_option()
+        self.config = apply_aimi_state(self.config, state)
         
         try:
             save_config(self.config)

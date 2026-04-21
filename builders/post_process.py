@@ -279,12 +279,7 @@ def steps_post_process(df, config, state):
     
     df["Asset Client ID"] = df[sys] + '-' + df[equip]
     
-    df["Duration (Hours)"] = None
-    df["Labor Cost ($)"] = None
-    
     if state == "pre":
-        df["Downtime (Hours)"] = 24
-        df["Material Cost ($)"] = 100000
         return df
     
     df[downtime] = pd.to_numeric(df[downtime], errors='coerce').fillna(0)
@@ -469,8 +464,6 @@ def failure_mode_failure_mech_post_process(df, config, state):
     df["Asset Client ID"] = df[sys] + '-' + df[equip]
 
     if state == "pre":
-        df["Failure Mode Name"] = "Thinning"
-        df["Failure Mechanism Name"] = "Unspecified Internal Corrosion"
         return df
 
     cols_to_clear = [

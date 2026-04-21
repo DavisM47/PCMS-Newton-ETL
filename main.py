@@ -1,10 +1,11 @@
+import sys
 import argparse
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
 
 from utils.db import create_sql_engine, validate_sql_engine, sql_server_busy
-from utils.config_manager import load_config
+from utils.config_manager import load_config, save_config, apply_aimi_state
 from utils.excel import disable_default_header_style
 from builders.asset_register import build_asset_register
 from builders.inspection_data import build_inspection_data
@@ -89,6 +90,12 @@ def main():
 
     state = args.state
     
+    if "--state" not in sys.argv:
+        print("No --state provided, defaulting to Pre-AIMI")
+        
+    config = apply_aimi_state(config, state)
+    save_config(config)
+    
     if args.all:
         for name, wb in WORKBOOKS.items():
             output_file = output_dir / f"{wb['filename']}_{timestamp}.xlsx"
@@ -98,7 +105,7 @@ def main():
 
             print(f"Created: {output_file}")
     else:
-        wb = WORKBOOKS[args.workbook]
+        wb = WORKBOOKS[args.wb]
         output_file = output_dir / f"{wb['filename']}_{timestamp}.xlsx"
 
         with pd.ExcelWriter(output_file, engine="openpyxl") as writer:

@@ -211,7 +211,9 @@ default_values:
     Task Number: Replace Asset
     Critical Path: "FALSE"
     Step Description: Replace Asset
+    Duration (Hours): null
     Downtime (Hours): 24
+    Labor Cost ($): null
     Material Cost ($): 100000
     Sort Order: 0
   assessments:
