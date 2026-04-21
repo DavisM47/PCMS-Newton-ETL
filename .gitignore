@@ -2,6 +2,7 @@
 /venv
 /build
 /dist
+/output
 __pycache__/
 *.pyc
 etl_app.spec
