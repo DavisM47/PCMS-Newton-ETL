@@ -1,7 +1,8 @@
 /.vscode
 /venv
-build/
-dist/
+/build
+/dist
 __pycache__/
 *.pyc
 etl_app.spec
+*.zip
