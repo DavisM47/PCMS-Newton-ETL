@@ -292,6 +292,8 @@ def steps_post_process(df, config, state):
     df["Downtime (Hours)"] = df[downtime] * 24
     df["Material Cost ($)"] = df[cost]
     
+    df = df.sort_values("Material Cost ($)", ascending=False).drop_duplicates(subset="Asset Client ID", keep='first')
+    
     return df
 
 #  ---- POF Assessment
@@ -336,11 +338,18 @@ def failure_modes_post_process(df, config, state):
     df["Asset Client ID"] = df[sys] + '-' + df[equip]
     
     if state == "pre":
-        df["Name"] = "Thinning"
-        df["PoF Model"] = "Thinning (Multi-Path Linear Degradation)"
-        df["Base Material Corrosion Rate (Mils/Year)"] = 3
         return df
     
+    cols_to_clear = [
+        "Name",
+        "PoF Model",
+        "Thinning (Multi-Path Linear Degradation)",
+    ]
+
+    mask = df[damage_mode] != "Internal Loss of Thickness"
+    df.loc[mask, cols_to_clear] = None
+
+
     df[suggest_rate] = pd.to_numeric(df[suggest_rate], errors='coerce').fillna(0)
     df["Base Material Corrosion Rate (Mils/Year)"] = df[suggest_rate] * 1000
     
@@ -365,25 +374,27 @@ def failure_mechanisms_post_process(df, config, state):
     df["Component Client ID"] = df[equip] + '-' + df[circuit]
     df["Asset Client ID"] = df[sys] + '-' + df[equip]
 
-    df["Susceptibility Override"] = "Corrosion Rate Modeled"
-
     if state == "pre":
-        df["Name"] = "Unspecified Internal Corrosion"
-        df["Location"] = "Internal"
-        df["Damage Mode"] = "Local Thinning"
-        df["Min Modeled Corrosion Rate Override"] = 2
-        df["Max Modeled Corrosion Rate Override"] = 4
-        df["Hole Size Override"] = "Small Hole"
         return df
+
+    cols_to_clear = [
+        "Name",
+        "Min Modeled Corrosion Rate Override",
+        "Max Modeled Corrosion Rate Override",
+        "Location",
+        "Damage Mode",
+        "Susceptibility Override",
+        "Hole Size Override",
+    ]
+
+    mask = df[damage_mode] != "Internal Loss of Thickness"
+    df.loc[mask, cols_to_clear] = None
 
     mask = df[damage_mode] == "Internal Loss of Thickness"
     df[suggest_rate] = pd.to_numeric(df[suggest_rate], errors='coerce').fillna(0)
+    df.loc[mask, "Susceptibility Override"] = "Corrosion Rate Modeled"
     df.loc[mask, "Min Modeled Corrosion Rate Override"] = df.loc[mask, suggest_rate] * 1000
     df.loc[mask, "Max Modeled Corrosion Rate Override"] = df.loc[mask, suggest_rate] * 1000
-    
-    df.loc[
-        df[damage_mode] != "Internal Loss of Thickness", ["Min Modeled Corrosion Rate Override", "Max Modeled Corrosion Rate Override", "Hole Size Override"]
-    ] = [None, None, None]
 
     df.loc[
         df[damage_mode] == "External Loss of Thickness", "Location" 
@@ -421,9 +432,11 @@ def function_failure_mode_post_process(df, config, state):
     df["Asset Client ID"] = df[sys] + '-' + df[equip]
     
     if state == "pre":
-        df["Failure Mode Name"] = "Thinning"
         return df
-        
+    
+    mask = df[damage_mode] != "Internal Loss of Thickness"
+    df.loc[mask, "Failure Mode Name"] = None
+    
     df.loc[
         df[damage_mode] == "Internal Loss of Thickness", "Failure Mode Name"
     ] = "Thinning"
@@ -459,6 +472,14 @@ def failure_mode_failure_mech_post_process(df, config, state):
         df["Failure Mode Name"] = "Thinning"
         df["Failure Mechanism Name"] = "Unspecified Internal Corrosion"
         return df
+
+    cols_to_clear = [
+        "Failure Mode Name",
+        "Failure Mechanism Name",
+    ]
+
+    mask = df[damage_mode] != "Internal Loss of Thickness"
+    df.loc[mask, cols_to_clear] = None
 
     df.loc[
         df[damage_mode] == "Internal Loss of Thickness", "Failure Mode Name"

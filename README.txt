@@ -35,11 +35,11 @@ RUNNING THE TOOL
 Navigate to the project folder in your terminal.
 
 Generate a single workbook:
-    python main.py --workbook asset_register
-    python main.py --workbook inspection_data
-    python main.py --workbook asset_task
-    python main.py --workbook pof_assessment
-    python main.py --workbook cof_assessment
+    python main.py --wb asset_register
+    python main.py --wb inspection_data
+    python main.py --wb asset_task
+    python main.py --wb pof_assessment
+    python main.py --wb cof_assessment
 
 Generate all workbooks at once:
     python main.py --all

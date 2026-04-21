@@ -65,18 +65,18 @@ mappings:
     Valve: Valve - On-Off - Solenoid
     Vertical Pump Can: Unrated Vessel/Tank - Process Vessel
   category:
-    Active: 'FALSE'
-    Inactive: 'TRUE'
+    Active: "FALSE"
+    Inactive: "TRUE"
   quality_ind:
-    I: 'TRUE'
-    C: 'FALSE'
-    D: 'FALSE'
-    E: 'FALSE'
-    G: 'FALSE'
-    L: 'FALSE'
-    N: 'FALSE'
-    R: 'FALSE'
-    V: 'FALSE'
+    I: "TRUE"
+    C: "FALSE"
+    D: "FALSE"
+    E: "FALSE"
+    G: "FALSE"
+    L: "FALSE"
+    N: "FALSE"
+    R: "FALSE"
+    V: "FALSE"
   damage_mechanism:
     885F Embrittlement: "885\xB0F (475\xB0C) Embrittlement"
     Amine Corrosion: null
@@ -209,7 +209,7 @@ default_values:
   steps:
     Action: Add
     Task Number: Replace Asset
-    Critical Path: 'FALSE'
+    Critical Path: "FALSE"
     Step Description: Replace Asset
     Downtime (Hours): 24
     Material Cost ($): 100000
@@ -221,15 +221,21 @@ default_values:
   functions:
     Action: Add
     Name: Transport fluid/gas from the inlet to the outlet
-    Is Manually Added?: 'TRUE'
+    Is Manually Added?: "TRUE"
   failure_modes:
     Action: Add
-    Is Manually Added?: 'TRUE'
-    Hidden: 'FALSE'
+    Is Manually Added?: "TRUE"
+    Hidden: "FALSE"
+    Name: Thinning
+    PoF Model: Thinning (Multi-Path Linear Degradation)
+    Base Material Corrosion Rate (Mils/Year): 3
   failure_mechanisms:
     Action: Add
-    Is Manually Added?: 'TRUE'
-    Susceptibility Override: "Corrosion Rate Modeled"
+    Is Manually Added?: "TRUE"
+    Name: Unspecified Internal Corrosion
+    Location: Internal
+    Damage Mode: Local Thinning
+    Susceptibility Override: Corrosion Rate Modeled
     Min Modeled Corrosion Rate Override: 2
     Max Modeled Corrosion Rate Override: 4
     Hole Size Override: Small Hole
@@ -240,18 +246,19 @@ default_values:
   failure_mode_failure_mech:
     Action: Add
     Failure Mode Name: Thinning
+    Failure Mechanism Name: Unspecified Internal Corrosion
   shared_fields:
     Action: null
   manual_hse:
     Action: Add
-    Active: 'TRUE'
+    Active: "TRUE"
     Area (ft2): 35
   manual_lost_prod:
     Action: Add
-    Active: 'TRUE'
+    Active: "TRUE"
   newton_repair_replace_task:
     Action: Add
-    Active: 'TRUE'
+    Active: "TRUE"
     Task Number: Replace Asset
     Task Definition: Replace Asset
 newton_columns:

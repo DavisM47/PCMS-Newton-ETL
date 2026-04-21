@@ -36,7 +36,6 @@ WORKBOOKS = {
     }
 }
 
-
 def parse_args():
     parser = argparse.ArgumentParser(
         description="PCMS data export tool"
@@ -45,7 +44,7 @@ def parse_args():
     group = parser.add_mutually_exclusive_group(required=True)
 
     group.add_argument(
-        "--workbook",
+        "--wb",
         choices=[
             "asset_register", 
             "inspection_data", 
@@ -61,7 +60,14 @@ def parse_args():
         action="store_true",
         help="Generate all available workbooks",
     )
-
+    
+    parser.add_argument(
+        "--state",
+        choices=["pre", "post"],
+        default="pre",
+        help="AIMI state: 'pre' or 'post' (default: pre)",
+    )
+    
     return parser.parse_args()
 
 def main():
@@ -81,10 +87,7 @@ def main():
         print("SQL Busy", "SQL Server currently busy")
         return
 
-    state = input("Pre or Post AIMI?: ")
-    
-    if state != "pre" and state != "post":
-        state = "pre"
+    state = args.state
     
     if args.all:
         for name, wb in WORKBOOKS.items():
