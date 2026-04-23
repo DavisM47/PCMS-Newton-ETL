@@ -1,7 +1,7 @@
 connection:
   driver: SQL Server
-  server: 557NCL3\MYSQLSERVER
-  database: PCMS_DEMO_9070
+  server: PCMS-DB-BIL
+  database: PCMSWIN
   trusted_connection: 'yes'
 filters:
   units: []
@@ -651,21 +651,15 @@ schema_map:
   failure_modes:
     equip_seqno: Asset Client ID
     circuit_seqno: Component Client ID
-    suggest_rate: Base Material Corrosion Rate (Mils/Year)
-    damage_mode: Name
   failure_mechanisms:
     equip_seqno: Asset Client ID
     circuit_seqno: Component Client ID
-    damage_mechanism: Name
-    damage_mode: Location
-    damage_type: Damage Mode
   function_failure_mode:
     equip_seqno: Asset Client ID
     circuit_seqno: Component Client ID
   failure_mode_failure_mech:
     equip_seqno: Asset Client ID
     circuit_seqno: Component Client ID
-    damage_mechanism: Failure Mechanism Name
   shared_fields:
     equip_seqno: Asset Client ID
     circuit_seqno: Component Client ID
@@ -679,3 +673,25 @@ schema_map:
   newton_repair_replace_task:
     equip_seqno: Asset Client ID
     circuit_seqno: Component Client ID
+corrosion_rate_uncertainty:
+  Amine Stress Corrosion Cracking: {min: 0.1, max: 0.1}
+  Ammonium Bisulfide (ASW) Corrosion: {min: 0.2, max: 0.2}
+  Ammonium Chloride Corrosion: {min: 0.4, max: 0.4}
+  Boiler Water/Condensate Corrosion: {min: 0.2, max: 0.2}
+  Brine Corrosion: {min: 0.1, max: 0.1}
+  Caustic Corrosion: {min: 0.2, max: 0.2}
+  CO2 Corrosion: {min: 0.2, max: 0.2}
+  Cooling Water Corrosion: {min: 0.2, max: 0.2}
+  CUI Carbon and Low Alloy Steels: {min: 0.3, max: 0.3}
+  Erosion/Erosion-Corrosion: {min: 0.99, max: 1.0}
+  Atmospheric Corrosion: {min: 0.1, max: 0.1}
+  Flue Gas Dew Point Corrosion: {min: 0.4, max: 0.4}
+  High Temperature H2/H2S Corrosion: {min: 0.99, max: 1.0}
+  Hydrochloric Acid Corrosion: {min: 0.25, max: 0.25}
+  Microbiologically Influenced Corrosion: {min: 0.2, max: 0.2}
+  Naphthenic Acid Corrosion: {min: 0.4, max: 0.4}
+  Oxidation: {min: 0.1, max: 0.1}
+  Soil Corrosion: {min: 0.25, max: 0.25}
+  Acidic Sour Water Corrosion: {min: 0.2, max: 0.2}
+  Sulfidation: {min: 0.99, max: 1.0}
+  Unspecified Internal Corrosion: {min: 0.99, max: 1.0}

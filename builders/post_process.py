@@ -338,12 +338,11 @@ def failure_modes_post_process(df, config, state):
     cols_to_clear = [
         "Name",
         "PoF Model",
-        "Thinning (Multi-Path Linear Degradation)",
+        "Base Material Corrosion Rate (Mils/Year)",
     ]
 
     mask = df[damage_mode] != "Internal Loss of Thickness"
     df.loc[mask, cols_to_clear] = None
-
 
     df[suggest_rate] = pd.to_numeric(df[suggest_rate], errors='coerce').fillna(0)
     df["Base Material Corrosion Rate (Mils/Year)"] = df[suggest_rate] * 1000
@@ -351,7 +350,7 @@ def failure_modes_post_process(df, config, state):
     damage_mode_map = config["mappings"]["damage_mode"]
     df["Name"] = df[damage_mode].map(damage_mode_map).fillna(df[damage_mode])
     pof_model_map = config["mappings"]["pof_model"]
-    df["PoF Model"] =  df[damage_mode].map(pof_model_map).fillna(df[damage_mode])
+    df["PoF Model"] =  df["Name"].map(pof_model_map).fillna(df["Name"])
     
     return df
 
@@ -388,8 +387,20 @@ def failure_mechanisms_post_process(df, config, state):
     mask = df[damage_mode] == "Internal Loss of Thickness"
     df[suggest_rate] = pd.to_numeric(df[suggest_rate], errors='coerce').fillna(0)
     df.loc[mask, "Susceptibility Override"] = "Corrosion Rate Modeled"
-    df.loc[mask, "Min Modeled Corrosion Rate Override"] = df.loc[mask, suggest_rate] * 1000
-    df.loc[mask, "Max Modeled Corrosion Rate Override"] = df.loc[mask, suggest_rate] * 1000
+    
+    # Map damage mechanism names first so we can look up uncertainty
+    damage_mechanism_map = config["mappings"]["damage_mechanism"]
+    df["Name"] = df[dm].map(damage_mechanism_map).fillna(df[dm])
+    
+    # Apply uncertainty % to min/max rates
+    uncertainty = config.get("corrosion_rate_uncertainty", {})
+    base_rate = df.loc[mask, suggest_rate] * 1000
+    
+    min_uncertainty = df.loc[mask, "Name"].map(lambda name: uncertainty.get(name, {}).get("min", 0)).astype(float)
+    max_uncertainty = df.loc[mask, "Name"].map(lambda name: uncertainty.get(name, {}).get("max", 0)).astype(float)
+
+    df.loc[mask, "Min Modeled Corrosion Rate Override"] = base_rate * (1 - min_uncertainty)
+    df.loc[mask, "Max Modeled Corrosion Rate Override"] = base_rate * (1 + max_uncertainty)
 
     df.loc[
         df[damage_mode] == "External Loss of Thickness", "Location" 
@@ -408,9 +419,7 @@ def failure_mechanisms_post_process(df, config, state):
     ] = ["Internal", "Cracking", "Crack"]
 
     damage_type_map = config["mappings"]["damage_type"]
-    df["Damage Mode"] = df["Damage Mode"].map(damage_type_map).fillna(df["Damage Mode"])
-    damage_mechanism_map = config["mappings"]["damage_mechanism"]
-    df["Name"] = df[dm].map(damage_mechanism_map).fillna(df[dm])
+    df["Damage Mode"] = df["damage_type"].map(damage_type_map).fillna(df["damage_type"])
 
     return df
 
